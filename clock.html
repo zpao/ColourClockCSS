@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <title>Clock!</title>
+    <style type="text/css">
+      body {
+        -moz-transition-property: background-color;
+        -moz-transition-duration: 1s;
+      }
+      #time {
+        text-align: center;
+        margin: 100px;
+        font-size: 150pt;
+        color: #FFF;
+        text-shadow: #000 1px 1px 4px;
+      }
+    </style>
+  </head>
+  <body id="body">
+    <script type="text/javascript">
+      function pad(aStr) {
+        return (aStr + "").length < 2 ? "0" + aStr : aStr;
+      }
+
+      window.addEventListener("load", function() {
+        window.setInterval(function() {
+          var now = new Date();
+          var color = "#";
+          color += pad(Math.round((now.getHours() / 24) * 0xFF).toString(16));
+          color += pad(Math.round((now.getMinutes() / 60) * 0xFF).toString(16));
+          color += pad(Math.round((now.getSeconds() / 60) * 0xFF).toString(16));
+          document.getElementById("time").textContent = pad(now.getHours()) + ":" +
+                                                        pad(now.getMinutes()) + ":" +
+                                                        pad(now.getSeconds());
+          document.getElementById("body").style.backgroundColor = color;
+        }, 1000);
+      }, false);
+    </script>
+    <div id="time"/>
+  </body>
+</html>
