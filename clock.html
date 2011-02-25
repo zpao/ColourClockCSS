@@ -3,7 +3,7 @@
     <title>Clock!</title>
     <style type="text/css">
       body {
-        -moz-transition-property: background-color;
+        -moz-transition-property: background-image;
         -moz-transition-duration: 1s;
       }
       #time {
@@ -26,14 +26,17 @@
       window.addEventListener("load", function() {
         window.setInterval(function() {
           var now = new Date();
-          var color = "#";
-          color += pad(Math.round((now.getHours() / 24) * 0xFF).toString(16));
-          color += pad(Math.round((now.getMinutes() / 60) * 0xFF).toString(16));
-          color += pad(Math.round((now.getSeconds() / 60) * 0xFF).toString(16));
+          var r = Math.round((now.getHours() / 24) * 0xFF);
+          var g = Math.round((now.getMinutes() / 60) * 0xFF);
+          var b = Math.round((now.getSeconds() / 60) * 0xFF);
+          var color1 = "rgba(" + [r,g,b,.8].join(",") + ")";
+          var color2 = "rgb(" + [r,g,b].join(",") + ")";
+
           document.getElementById("time").textContent = pad(now.getHours()) + ":" +
                                                         pad(now.getMinutes()) + ":" +
                                                         pad(now.getSeconds());
-          document.getElementById("body").style.backgroundColor = color;
+          document.getElementById("body").style.backgroundImage =
+            "-moz-radial-gradient(center 45deg, circle farthest-corner, " + color1 + " 0%, " + color2 + " 100%)";
         }, 1000);
       }, false);
     </script>
